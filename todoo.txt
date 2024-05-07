@@ -1,0 +1,1 @@
+add nonchelant error in strings func in pictures.go and proper return values

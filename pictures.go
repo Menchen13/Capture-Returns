@@ -21,4 +21,6 @@ func string() ([]byte, error) {
 	client.Trim = true
 	client.SetImageFromBytes(str)
 	fmt.Println(client.Text())
+
+	return []byte{}, err
 }
