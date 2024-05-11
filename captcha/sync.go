@@ -3,6 +3,7 @@ package captcha
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func Sync(url string) *http.Client {
@@ -22,10 +23,14 @@ func Sync(url string) *http.Client {
 		panic(err)
 	}
 
-	//220 characters in body before layble and image
+	//220 characters in body before lable and image
 	arr := make([]byte, 220)
 	resp.Body.Read(arr)
+
 	//check for captcha in arr
+	if strings.Contains(string(arr), "captcha") {
+		fmt.Println("Captcha synced!")
+	}
 
 	return &client
 }

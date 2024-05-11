@@ -1,1 +1,3 @@
-add nonchelant error in strings func in pictures.go and proper return values
+add nonchelant error in Term func in pictures.go and proper return values. Also make image.base64 arg of func
+
+add errors to sync

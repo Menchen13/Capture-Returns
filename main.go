@@ -2,14 +2,16 @@
 package main
 
 import (
-	"Menchen13/Capture-Returns/captcha"
-	"fmt"
+	"flag"
 )
 
 func main() {
 
-	_, err := captcha.Term()
-
-	fmt.Println(err)
+	url := flag.String("u", "", "Url to attack")
+	flag.Parse()
+	if *url == "" {
+		flag.PrintDefaults()
+		return
+	}
 
 }
