@@ -14,4 +14,7 @@ func main() {
 		return
 	}
 
+	//client := captcha.Sync(*url)
+	//defer client.Close()
+
 }
