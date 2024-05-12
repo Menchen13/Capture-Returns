@@ -1,7 +1,0 @@
-add nonchelant error in Term func in pictures.go and proper return values. Also make image.base64 arg of func
-
-add errors to sync
-
-After syncing http Client start bruteforcer, which will determin the Captcha type and pass it to the coresponding
-funciton. The return value from the func is then passed to the sender, who sends the post requests with the
-user:pass combination.
