@@ -13,6 +13,8 @@ RUN apt-get update -qq
 # When you miss these or LD_LIBRARY_PATH is not set to them,
 # you would face an error: "tesseract/baseapi.h: No such file or directory"
 RUN apt-get install -y -qq libtesseract-dev libleptonica-dev
+#sudo for dev container
+RUN apt-get install -y -qq sudo
 
 # In case you face TESSDATA_PREFIX error, you minght need to set env vars
 # to specify the directory where "tessdata" is located.
@@ -36,6 +38,10 @@ WORKDIR /workdir
 #which are passed with the volume
 
 RUN useradd -ms /bin/bash dev
+
+# Allow the "dev" user to run sudo without a password
+RUN echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 
 USER dev
 
