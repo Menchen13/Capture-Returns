@@ -32,6 +32,14 @@ RUN apt-get install -y -qq \
 WORKDIR /workdir
 
 #all my project files will be added using a volume during development time
+#I also shouldnt have to get any dependencies, as they should be installed acording to the go.mod and go.sum file
+#which are passed with the volume
+
+RUN useradd -ms /bin/bash dev
+
+USER dev
+
+
 
 # Let's have gosseract in your project and test it.
 #RUN go get -t github.com/otiai10/gosseract/v2
