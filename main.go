@@ -5,6 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -31,10 +33,38 @@ func main() {
 
 	_, err := http.Get(*url)
 	if err != nil {
-		fmt.Println("Error reaching url!", err)
+		fmt.Println("Error reaching url! ", err)
+		return
 	}
 
-	//client := captcha.Sync(*url)
-	//defer client.Close()
+	user, err := os.ReadFile(*userfile)
+	if err != nil {
+		fmt.Println("Error reading userfile! ", err)
+		return
+	}
 
+	pass, err := os.ReadFile(*passfile)
+	if err != nil {
+		fmt.Println("Error reading passfile! ", err)
+		return
+	}
+
+	var userSlice []string = strings.FieldsFunc(string(user), linebreak)
+	var passSlice []string = strings.FieldsFunc(string(pass), linebreak)
+
+	if userSlice == nil {
+		fmt.Println("Error while slicing userfile! ")
+	}
+
+	if passSlice == nil {
+		fmt.Println("Error while slicing passfile!")
+	}
+}
+
+func linebreak(r rune) bool {
+	if r == '\n' || r == '\r' {
+		return true
+	} else {
+		return false
+	}
 }
