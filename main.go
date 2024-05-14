@@ -37,6 +37,7 @@ func main() {
 		return
 	}
 
+	//read in user and pass file
 	user, err := os.ReadFile(*userfile)
 	if err != nil {
 		fmt.Println("Error reading userfile! ", err)
@@ -49,6 +50,7 @@ func main() {
 		return
 	}
 
+	//turn user and pass file into slices for easier iteration
 	var userSlice []string = strings.FieldsFunc(string(user), linebreak)
 	var passSlice []string = strings.FieldsFunc(string(pass), linebreak)
 
@@ -59,7 +61,26 @@ func main() {
 	if passSlice == nil {
 		fmt.Println("Error while slicing passfile!")
 	}
+
+	//main bruteforce loop
+	/*
+		for i, v := range userSlice {
+			for n, k := range passSlice {
+				if captcha.test {
+					captacha.solve()
+				} else {
+					if try(v, k) {
+						fmt.Println("Success! ", v, ":", k)
+						return
+					}
+				}
+			}
+		}
+	*/
+
 }
+
+func try(user string, pass string)
 
 func linebreak(r rune) bool {
 	if r == '\n' || r == '\r' {
