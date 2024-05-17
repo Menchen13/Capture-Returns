@@ -2,6 +2,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"net/http"
@@ -38,29 +39,7 @@ func main() {
 	}
 
 	//read in user and pass file
-	user, err := os.ReadFile(*userfile)
-	if err != nil {
-		fmt.Println("Error reading userfile! ", err)
-		return
-	}
-
-	pass, err := os.ReadFile(*passfile)
-	if err != nil {
-		fmt.Println("Error reading passfile! ", err)
-		return
-	}
-
-	//turn user and pass file into slices for easier iteration
-	var userSlice []string = strings.FieldsFunc(string(user), linebreak)
-	var passSlice []string = strings.FieldsFunc(string(pass), linebreak)
-
-	if userSlice == nil {
-		fmt.Println("Error while slicing userfile! ")
-	}
-
-	if passSlice == nil {
-		fmt.Println("Error while slicing passfile!")
-	}
+	userSlice, passSlice, err := FiletoSlice(userfile, passfile)
 
 	//main bruteforce loop
 	/*
@@ -80,7 +59,7 @@ func main() {
 
 }
 
-func try(user string, pass string)
+//func try(user string, pass string)
 
 func linebreak(r rune) bool {
 	if r == '\n' || r == '\r' {
@@ -88,4 +67,27 @@ func linebreak(r rune) bool {
 	} else {
 		return false
 	}
+}
+
+// takes path to userfile and path to passfile and returns slices of the lists
+func FiletoSlice(userfile *string, passfile *string) (u []string, p []string, e error) {
+	user, err := os.ReadFile(*userfile)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	pass, err := os.ReadFile(*passfile)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//turn user and pass file into slices for easier iteration
+	var userSlice []string = strings.FieldsFunc(string(user), linebreak)
+	var passSlice []string = strings.FieldsFunc(string(pass), linebreak)
+
+	if userSlice == nil || passSlice == nil {
+		return nil, nil, errors.New("nil slice")
+	}
+
+	return userSlice, passSlice, nil
 }
