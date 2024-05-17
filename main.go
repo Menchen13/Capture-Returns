@@ -41,22 +41,6 @@ func main() {
 	//read in user and pass file
 	userSlice, passSlice, err := FiletoSlice(userfile, passfile)
 
-	//main bruteforce loop
-	/*
-		for i, v := range userSlice {
-			for n, k := range passSlice {
-				if captcha.test {
-					captacha.solve()
-				} else {
-					if try(v, k) {
-						fmt.Println("Success! ", v, ":", k)
-						return
-					}
-				}
-			}
-		}
-	*/
-
 }
 
 //func try(user string, pass string)
