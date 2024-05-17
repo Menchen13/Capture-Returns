@@ -41,21 +41,19 @@ func main() {
 	//read in user and pass file
 	userSlice, passSlice, err := FiletoSlice(userfile, passfile)
 
-	//main bruteforce loop
-	/*
-		for i, v := range userSlice {
-			for n, k := range passSlice {
-				if captcha.test {
-					captacha.solve()
-				} else {
-					if try(v, k) {
-						fmt.Println("Success! ", v, ":", k)
-						return
-					}
-				}
-			}
+	//creating client and initial response for main loop
+	var client http.Client
+	resp, _ := client.Get(*url)
+
+	//main bruteloop
+	for i, v := range userSlice {
+		for j, k := range passSlice {
+			//check if respone has captcha
+			//if it does call function to beat all captchas
+
+			//try user pas combi
 		}
-	*/
+	}
 
 }
 
