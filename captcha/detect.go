@@ -8,12 +8,13 @@ import (
 
 func IsCaptcha(resp *http.Response) bool {
 
-	//220 characters in body before lable and image
-	arr := make([]byte, 220)
+	//1550 characters in body before lable and image
+	arr := make([]byte, 1550)
 	resp.Body.Read(arr)
 	defer resp.Body.Close()
 
 	//check for captcha in arr
+	//only check last little bit
 	fmt.Println(string(arr))
 	if strings.Contains(string(arr), "captcha") {
 		return true
