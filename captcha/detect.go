@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// returns true if the response contains a captcha
 func IsCaptcha(resp *http.Response) bool {
 
 	//1550 characters in body before lable and image
@@ -21,13 +22,17 @@ func IsCaptcha(resp *http.Response) bool {
 	return false
 }
 
+// returns ture if the captcha is shape based
+// still needs testing!!!
 func isShape(resp *http.Response) bool {
-	arr := make([]byte, 330)
+	//about 1650 bytes till image
+	arr := make([]byte, 1700)
 
 	resp.Body.Read(arr)
 	defer resp.Body.Close()
 
-	if strings.Contains(string(arr), "shape") {
+	//only check in last little bit of body
+	if strings.Contains(string(arr[1500:]), "shape") {
 		return true
 	}
 	return false
