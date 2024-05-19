@@ -9,7 +9,7 @@ import (
 
 func TestIsCaptcha(t *testing.T) {
 	//variable settup (god this is horrific)
-	var u string = "http://10.10.122.216"
+	var u string = "http://10.10.128.201"
 	var client http.Client
 
 	v := url.Values{}
