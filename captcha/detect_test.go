@@ -1,14 +1,13 @@
 package captcha
 
 import (
-	"Menchen13/Capture-Returns/brute"
 	"net/http"
 	"net/url"
 	"testing"
 )
 
 func TestIsCaptcha(t *testing.T) {
-	//tests successfull
+	//tests successfull skipping this now as it is no longer functional
 	t.SkipNow()
 	//variable settup (god this is horrific)
 	var u string = "http://10.10.128.201"
@@ -21,7 +20,7 @@ func TestIsCaptcha(t *testing.T) {
 	r, _ := client.Get(u)
 	//send 3 tries to get sever to initiate captcha
 	for i := 0; i < 3; i++ {
-		brute.Try(&client, u, "user", "pass")
+		//brute.Try(&client, u, "user", "pass")
 	}
 	c, _ := client.Get(u)
 
