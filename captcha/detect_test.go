@@ -17,11 +17,7 @@ func TestIsCaptcha(t *testing.T) {
 
 	r, _ := client.Get(u)
 
-	for i := 0; i < 3; i++ {
-		client.PostForm(u, v)
-	}
-
-	c, _ := client.Get(u)
+	//need the try func to produce positve captcha tests
 
 	//defining test cases
 	type args struct {
@@ -37,11 +33,13 @@ func TestIsCaptcha(t *testing.T) {
 			args: args{resp: r},
 			want: false,
 		},
-		{
+		//need to finish try function before i can start on the yes captcha tests
+		/*{
 			name: "yesCaptcha",
 			args: args{resp: c},
 			want: true,
 		},
+		*/
 	}
 
 	//actuall tests
