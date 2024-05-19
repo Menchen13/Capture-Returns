@@ -33,7 +33,7 @@ func TestIsCaptcha(t *testing.T) {
 			args: args{resp: r},
 			want: false,
 		},
-		//need to finish try function before i can start on the yes captcha tests
+		//need to finish try function before i can start on the yesCaptcha tests
 		/*{
 			name: "yesCaptcha",
 			args: args{resp: c},
