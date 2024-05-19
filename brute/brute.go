@@ -8,8 +8,9 @@ import (
 
 func try(client *http.Client, u string, user string, pass string) *http.Response {
 	v := url.Values{}
-	v.Set("user", user)
-	v.Set("pass", pass)
+	v.Set("username", user)
+	v.Set("password", pass)
+	fmt.Println(v)
 
 	resp, err := client.PostForm(u, v)
 	if err != nil {
