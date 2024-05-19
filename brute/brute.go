@@ -6,12 +6,12 @@ import (
 	"net/url"
 )
 
-func try(client *http.Client, u *string, user string, pass string) *http.Response {
+func try(client *http.Client, u string, user string, pass string) *http.Response {
 	v := url.Values{}
 	v.Set("user", user)
 	v.Set("pass", pass)
 
-	resp, err := client.PostForm(*u, v)
+	resp, err := client.PostForm(u, v)
 	if err != nil {
 		fmt.Println("Error trying user pass combination", err)
 	}
