@@ -8,7 +8,7 @@ import (
 
 func Test_try(t *testing.T) {
 	t.SkipNow()
-	r := try(http.DefaultClient, "http://10.10.122.216/login", "test1", "test2")
+	r := Try(http.DefaultClient, "http://10.10.122.216/login", "test1", "test2")
 
 	var arr []byte = make([]byte, r.ContentLength)
 	r.Body.Read(arr)

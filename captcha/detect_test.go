@@ -1,6 +1,7 @@
 package captcha
 
 import (
+	"Menchen13/Capture-Returns/brute"
 	"net/http"
 	"net/url"
 	"testing"
@@ -16,8 +17,11 @@ func TestIsCaptcha(t *testing.T) {
 	v.Set("pass", "tests2")
 
 	r, _ := client.Get(u)
-
-	//need the try func to produce positve captcha tests
+	//send 3 tries to get sever to initiate captcha
+	for i := 0; i < 3; i++ {
+		brute.Try(&client, u, "user", "pass")
+	}
+	c, _ := client.Get(u)
 
 	//defining test cases
 	type args struct {
@@ -33,13 +37,11 @@ func TestIsCaptcha(t *testing.T) {
 			args: args{resp: r},
 			want: false,
 		},
-		//need to finish try function before i can start on the yesCaptcha tests
-		/*{
+		{
 			name: "yesCaptcha",
 			args: args{resp: c},
 			want: true,
 		},
-		*/
 	}
 
 	//actuall tests

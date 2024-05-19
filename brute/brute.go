@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-func try(client *http.Client, u string, user string, pass string) *http.Response {
+func Try(client *http.Client, u string, user string, pass string) *http.Response {
 	v := url.Values{}
 	v.Set("username", user)
 	v.Set("password", pass)
