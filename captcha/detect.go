@@ -15,8 +15,8 @@ func IsCaptcha(resp *http.Response) bool {
 
 	//check for captcha in arr
 	//only check last little bit
-	fmt.Println(string(arr))
-	if strings.Contains(string(arr), "captcha") {
+	fmt.Println(string(arr[1300:]))
+	if strings.Contains(string(arr[1300:]), "captcha") {
 		return true
 	}
 
