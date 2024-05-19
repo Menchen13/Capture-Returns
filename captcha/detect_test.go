@@ -7,15 +7,7 @@ import (
 )
 
 func TestIsCaptcha(t *testing.T) {
-	type args struct {
-		resp *http.Response
-	}
-	tests := []struct {
-		name string
-		args args
-		want bool
-	}{}
-
+	//variable settup (god this is horrific)
 	var u string = "http://10.10.122.216"
 	var client http.Client
 
@@ -24,28 +16,60 @@ func TestIsCaptcha(t *testing.T) {
 	v.Set("pass", "tests2")
 
 	r, _ := client.Get(u)
+
 	for i := 0; i < 3; i++ {
 		client.PostForm(u, v)
 	}
 
 	c, _ := client.Get(u)
 
-	tests[0] = struct {
+	//defining test cases
+	type args struct {
+		resp *http.Response
+	}
+	tests := []struct {
 		name string
 		args args
 		want bool
-	}{"noCaptcha", args{resp: r}, false}
+	}{
+		{
+			name: "noCaptcha",
+			args: args{resp: r},
+			want: false,
+		},
+		{
+			name: "yesCaptcha",
+			args: args{resp: c},
+			want: true,
+		},
+	}
 
-	tests[1] = struct {
-		name string
-		args args
-		want bool
-	}{"yesCaptcha", args{resp: c}, true}
-
+	//actuall tests
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := IsCaptcha(tt.args.resp); got != tt.want {
 				t.Errorf("IsCaptcha() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_isShape(t *testing.T) {
+	type args struct {
+		resp *http.Response
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isShape(tt.args.resp); got != tt.want {
+				t.Errorf("isShape() = %v, want %v", got, tt.want)
 			}
 		})
 	}

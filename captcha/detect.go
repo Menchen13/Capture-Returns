@@ -21,3 +21,15 @@ func IsCaptcha(resp *http.Response) bool {
 
 	return false
 }
+
+func isShape(resp *http.Response) bool {
+	arr := make([]byte, 330)
+
+	resp.Body.Read(arr)
+	defer resp.Body.Close()
+
+	if strings.Contains(string(arr), "shape") {
+		return true
+	}
+	return false
+}
