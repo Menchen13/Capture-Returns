@@ -13,11 +13,11 @@ import (
 
 func main() {
 
-	url := flag.String("u", "", "Url to attack")
+	U := flag.String("u", "", "Url to attack")
 	userfile := flag.String("l", "", "Path to file with usernames")
 	passfile := flag.String("p", "", "Path to file with passwords")
 	flag.Parse()
-	if *url == "" {
+	if *U == "" {
 		fmt.Println("No Url specified")
 		flag.PrintDefaults()
 		return
@@ -32,8 +32,8 @@ func main() {
 	}
 
 	//check if url is reachable
-
-	_, err := http.Get(*url)
+	u := *U
+	_, err := http.Get(u)
 	if err != nil {
 		fmt.Println("Error reaching url! ", err)
 		return
@@ -48,7 +48,7 @@ func main() {
 
 	//creating client and initial response for main loop
 	var client http.Client
-	resp, _ := client.Get(*url)
+	resp, _ := client.Get(u)
 
 	//main bruteloop
 
