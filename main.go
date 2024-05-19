@@ -2,6 +2,7 @@
 package main
 
 import (
+	"Menchen13/Capture-Returns/captcha"
 	"errors"
 	"flag"
 	"fmt"
@@ -40,15 +41,22 @@ func main() {
 
 	//read in user and pass file
 	userSlice, passSlice, err := FiletoSlice(userfile, passfile)
+	if err != nil {
+		fmt.Println("Error when parsing file to slice: ", err)
+		return
+	}
 
 	//creating client and initial response for main loop
 	var client http.Client
 	resp, _ := client.Get(*url)
 
 	//main bruteloop
+
 	for i, v := range userSlice {
 		for j, k := range passSlice {
-			//check if respone has captcha
+			if captcha.IsCaptcha(resp) {
+
+			}
 			//if it does call function to beat all captchas
 
 			//try user pas combi
@@ -84,7 +92,7 @@ func FiletoSlice(userfile *string, passfile *string) (u []string, p []string, e 
 	var passSlice []string = strings.FieldsFunc(string(pass), linebreak)
 
 	if userSlice == nil || passSlice == nil {
-		return nil, nil, errors.New("nil slice")
+		return nil, nil, errors.New("nil slice detected")
 	}
 
 	return userSlice, passSlice, nil
