@@ -23,3 +23,8 @@ func try(client *http.Client, u string, user string, pass string) *http.Response
 	}
 	return resp
 }
+
+// tries combination of user:pass
+func Orca(user string, pass string) bool {
+	return false
+}
