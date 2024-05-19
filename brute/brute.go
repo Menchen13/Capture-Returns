@@ -25,6 +25,7 @@ func try(client *http.Client, u string, user string, pass string) *http.Response
 }
 
 // tries combination of user:pass
+// NOT IMPLEMENTET YET
 func Orca(user string, pass string) bool {
 	return false
 }
