@@ -59,7 +59,7 @@ func main() {
 			if captcha.IsCaptcha(resp) {
 				captcha.Solver(u)
 
-			} else if brute.Orca(v, k) {
+			} else if brute.Orca(u, v, k) {
 				fmt.Println("Done! Found combination:  ", v, ":", k)
 				return
 			}

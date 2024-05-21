@@ -26,6 +26,14 @@ func try(client *http.Client, u string, user string, pass string) *http.Response
 
 // tries combination of user:pass
 // NOT IMPLEMENTET YET
-func Orca(user string, pass string) bool {
+func Orca(Url string, user string, pass string) bool {
+	resp := try(http.DefaultClient, Url, user, pass)
+
+	//still need to ajust lenght of read in
+	arr := make([]byte, 100)
+	resp.Body.Read(arr)
+
+	//need to find an identifier for success
+
 	return false
 }
