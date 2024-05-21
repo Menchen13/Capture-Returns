@@ -48,7 +48,7 @@ func main() {
 	}
 
 	//creating client and initial response for main loop
-	var client http.Client
+	var client *http.Client = http.DefaultClient
 	resp, _ := client.Get(u)
 
 	//main bruteloop
@@ -59,7 +59,7 @@ func main() {
 			if captcha.IsCaptcha(resp) {
 				captcha.Solver(u)
 
-			} else if brute.Orca(v, k) {
+			} else if brute.Orca(u, v, k) {
 				fmt.Println("Done! Found combination:  ", v, ":", k)
 				return
 			}
