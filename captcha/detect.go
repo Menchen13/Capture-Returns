@@ -22,7 +22,7 @@ func IsCaptcha(resp *http.Response) bool {
 	return false
 }
 
-// returns ture if the captcha is shape based
+// returns true if the captcha is shape based
 // still needs testing!!!
 func isShape(resp *http.Response) bool {
 	//about 1650 bytes till image

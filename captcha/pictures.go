@@ -8,21 +8,21 @@ import (
 )
 
 // takes in base64-legal sting containing the term image and returns the solved term.
-func Term(base64encoded string) (int, error) {
+func term(base64encoded string) (string, error) {
 	client := gosseract.NewClient()
 	defer client.Close()
 
 	//getting testing image string from Responses
 	str, err := base64.StdEncoding.DecodeString(base64encoded)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
 	client.SetWhitelist("0123456789+*-/?=")
 	client.Trim = true
 	err = client.SetImageFromBytes(str)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
 	term, err := client.Text()
@@ -32,10 +32,16 @@ func Term(base64encoded string) (int, error) {
 
 	result, err := eval(term)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
-	return result, nil
+	return string(result), nil
+}
+
+// takes in the base64encoded image string and returns the name of the shape as a string
+// NOT IMPLEMENTET YET!!
+func shape(b64encoded string) string {
+	return ""
 }
 
 func eval(s string) (int, error) {
