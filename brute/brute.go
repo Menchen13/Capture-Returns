@@ -25,15 +25,16 @@ func try(client *http.Client, u string, user string, pass string) *http.Response
 }
 
 // tries combination of user:pass
-// NOT IMPLEMENTET YET
+// checks for redirect to find a matching combination this might not work!!!
+// Very hard to test. SO untested
 func Orca(Url string, user string, pass string) bool {
 	resp := try(http.DefaultClient, Url, user, pass)
 
-	//still need to ajust lenght of read in
-	arr := make([]byte, 100)
-	resp.Body.Read(arr)
-
 	//need to find an identifier for success
+	//Identifier will be redirect, hopefully this works
+	if resp.StatusCode >= 300 && resp.StatusCode <= 400 {
+		return true
+	}
 
 	return false
 }
