@@ -40,8 +40,8 @@ func term(base64encoded string) (string, error) {
 
 // takes in the base64encoded image string and returns the name of the shape as a string
 // NOT IMPLEMENTET YET!!
-func shape(b64encoded string) string {
-	return ""
+func shape(b64encoded string) (string, error) {
+	return "", nil
 }
 
 func eval(s string) (int, error) {

@@ -20,7 +20,7 @@ func Solver(u string) {
 		//check for type of captcha and call responding solve function
 		var answer string
 		if isShape(resp) {
-			answer = shape(img)
+			answer, err = shape(img)
 		} else {
 			answer, err = term(img)
 		}
@@ -38,7 +38,7 @@ func Solver(u string) {
 }
 
 // takes in a http Response and returns the b64 encoded image string
-// NOT IMPLEMENTET YET!!!
+// needs testing
 func getImage(resp *http.Response) string {
 	//fuck it. Whole body it is.
 
@@ -47,7 +47,14 @@ func getImage(resp *http.Response) string {
 	//about 1400 characters till body starts
 	var str = string(arr[1400:])
 
-	strings.C
+	_, str, a := strings.Cut(str, "src")
+	if !a {
+		panic("Couldnt cut cout to response 1")
+	}
+	//cuts of everything until the b64 string
+	str = str[strings.Index(str, ","):]
+	//cuts of everything after the b64 string
+	str = str[:strings.IndexByte(str, byte('"'))]
 
-	return ""
+	return str
 }
