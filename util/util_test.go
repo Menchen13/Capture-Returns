@@ -6,7 +6,8 @@ import (
 )
 
 func TestRespFromFile(t *testing.T) {
-	resp := RespFromFile("..\\Responses\\circle.html")
+	//path needs to match layout of dev container.
+	resp := RespFromFile("Responses/circle.html")
 	if resp == nil {
 		t.Fatal("resp is nil")
 	}
