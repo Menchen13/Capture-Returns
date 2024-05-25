@@ -32,8 +32,13 @@ func main() {
 		return
 	}
 
-	//check if url is reachable
 	u := *U
+	//add the login part if needed
+	if !strings.Contains(u, "login") {
+		u += "/login"
+	}
+
+	//check if url is reachable
 	_, err := http.Get(u)
 	if err != nil {
 		fmt.Println("Error reaching url! ", err)
