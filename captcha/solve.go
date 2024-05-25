@@ -38,7 +38,6 @@ func Solver(u string) {
 }
 
 // takes in a http Response and returns the b64 encoded image string
-// needs testing
 func getImage(resp *http.Response) string {
 	//fuck it. Whole body it is.
 
@@ -52,7 +51,7 @@ func getImage(resp *http.Response) string {
 		panic("Couldnt cut cout to response 1")
 	}
 	//cuts of everything until the b64 string
-	str = str[strings.Index(str, ","):]
+	str = str[strings.Index(str, ",")+1:]
 	//cuts of everything after the b64 string
 	str = str[:strings.IndexByte(str, byte('"'))]
 
