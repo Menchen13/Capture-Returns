@@ -1,6 +1,7 @@
 package captcha
 
 import (
+	"Menchen13/Capture-Returns/util"
 	"net/http"
 	"net/url"
 	"testing"
@@ -64,8 +65,16 @@ func Test_isShape(t *testing.T) {
 		args args
 		want bool
 	}{
-		// TODO: Add test cases.
-
+		{
+			name: "shape",
+			args: args{resp: util.RespFromFile("Responses/circle.html")},
+			want: true,
+		},
+		{
+			name: "noShape",
+			args: args{resp: util.RespFromFile("Responses/multiplication.html")},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
