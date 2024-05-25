@@ -16,6 +16,7 @@ func Solver(u string) {
 
 	}
 
+	//do everything 3 times as captchas come in batches of 3
 	for i := 0; i < 3; i++ {
 
 		//get b64 encoded image sting from response

@@ -31,7 +31,9 @@ RUN apt-get install -y -qq \
 # downloaded traineddata under ${TESSDATA_PREFIX}/tessdata.
 
 # Setup your cool project with go.mod.
-WORKDIR /workdir
+WORKDIR /gocv
+
+RUN git clone https://github.com/hybridgroup/gocv.git && cd gocv && make install
 
 #all my project files will be added using a volume during development time
 #I also shouldnt have to get any dependencies, as they should be installed acording to the go.mod and go.sum file

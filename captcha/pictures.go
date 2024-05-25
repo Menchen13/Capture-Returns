@@ -8,6 +8,12 @@ import (
 	"github.com/otiai10/gosseract/v2"
 )
 
+// takes in the base64encoded image string and returns the name of the shape as a string
+// NOT IMPLEMENTET YET!!
+func shape(b64encoded string) (string, error) {
+	return "", nil
+}
+
 // takes in base64-legal sting containing the term image and returns the solved term.
 func term(base64encoded string) (string, error) {
 	client := gosseract.NewClient()
@@ -39,12 +45,6 @@ func term(base64encoded string) (string, error) {
 	// convert the result to string using fmt.Sprint
 	var a = fmt.Sprint(result)
 	return a, nil
-}
-
-// takes in the base64encoded image string and returns the name of the shape as a string
-// NOT IMPLEMENTET YET!!
-func shape(b64encoded string) (string, error) {
-	return "", nil
 }
 
 func eval(s string) (int, error) {

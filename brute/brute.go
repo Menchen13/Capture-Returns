@@ -10,7 +10,6 @@ func try(client *http.Client, u string, user string, pass string) *http.Response
 	v := url.Values{}
 	v.Set("username", user)
 	v.Set("password", pass)
-	//finish url if needed
 
 	resp, err := client.PostForm(u, v)
 	if err != nil {
