@@ -6,7 +6,11 @@ import (
 )
 
 // returns true if the response contains a captcha
-func IsCaptcha(resp *http.Response) bool {
+func IsCaptcha(u string) bool {
+	resp, err := http.Get(u)
+	if err != nil {
+		panic(err)
+	}
 
 	//1550 characters in body before lable and image
 	arr := make([]byte, 1550)

@@ -52,16 +52,12 @@ func main() {
 		return
 	}
 
-	//creating client and initial response for main loop
-	var client *http.Client = http.DefaultClient
-	resp, _ := client.Get(u)
-
 	//main bruteloop
 
 	for _, v := range userSlice {
 		for _, k := range passSlice {
 
-			if captcha.IsCaptcha(resp) {
+			if captcha.IsCaptcha(u) {
 				captcha.Solver(u)
 
 			} else if brute.Orca(u, v, k) {

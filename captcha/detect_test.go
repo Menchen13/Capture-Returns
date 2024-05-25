@@ -3,11 +3,10 @@ package captcha
 import (
 	"Menchen13/Capture-Returns/util"
 	"net/http"
-	"net/url"
 	"testing"
 )
 
-func TestIsCaptcha(t *testing.T) {
+/*func TestIsCaptcha(t *testing.T) {
 	//tests successfull skipping this now as it is no longer functional
 	t.SkipNow()
 	//variable settup (god this is horrific)
@@ -54,7 +53,7 @@ func TestIsCaptcha(t *testing.T) {
 			}
 		})
 	}
-}
+}*/
 
 func Test_isShape(t *testing.T) {
 	type args struct {
