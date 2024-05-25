@@ -7,6 +7,7 @@ import (
 )
 
 // Solves all captchas until another attempt is possible
+// TODOO implement shape() and finish post form
 // NOT IMPLEMENTET YET!!!
 func Solver(u string) {
 	for i := 0; i < 3; i++ {
