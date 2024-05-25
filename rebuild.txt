@@ -1,3 +1,7 @@
 docker build -t capreturns:dev -q .
 waitfor /T 10
+Desktop:
+docker run --name capreturns -it -v C:\Users\Menchen\code\Go\Capture-Returns:/workdir -u dev capreturns:dev bash
+
+laptop:
 docker run --name capreturns -it -v C:\Users\hildebrandt\Documents\code\Go\Capture-Returns\:/workdir -u dev capreturns:dev bash
