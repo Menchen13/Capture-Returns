@@ -2,6 +2,7 @@ package captcha
 
 import (
 	"encoding/base64"
+	"fmt"
 
 	"github.com/Knetic/govaluate"
 	"github.com/otiai10/gosseract/v2"
@@ -35,7 +36,9 @@ func term(base64encoded string) (string, error) {
 		return "", err
 	}
 
-	return string(result), nil
+	// convert the result to string using fmt.Sprint
+	var a = fmt.Sprint(result)
+	return a, nil
 }
 
 // takes in the base64encoded image string and returns the name of the shape as a string
