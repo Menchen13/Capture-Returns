@@ -7,14 +7,17 @@ import (
 )
 
 // Solves all captchas until another attempt is possible
-// TODOO implement shape() and finish post form
-// NOT IMPLEMENTET YET!!!
+// TODOO implement shape()
+// NOT TESTET YET
 func Solver(u string) {
+	resp, err := http.Get(u)
+	if err != nil {
+		panic(err)
+
+	}
+
 	for i := 0; i < 3; i++ {
-		resp, err := http.Get(u)
-		if err != nil {
-			panic(err)
-		}
+
 		//get b64 encoded image sting from response
 		var img = getImage(resp)
 
@@ -29,11 +32,14 @@ func Solver(u string) {
 		if err != nil {
 			panic(err)
 		}
-		//What is the server variable name?
+		//create url Value and add answer to it
 		var v url.Values
-		v.Add("?", answer)
-		//need to add the Postform for aswering captcha.
-
+		v.Add("captcha", answer)
+		//send answer using PostForm func and get the response as input for next iteration
+		resp, err = http.PostForm(u, v)
+		if err != nil {
+			panic(err)
+		}
 	}
 	return
 }
