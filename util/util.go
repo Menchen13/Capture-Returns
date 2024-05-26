@@ -3,7 +3,9 @@ package util
 import (
 	"bufio"
 	"bytes"
+	"encoding/base64"
 	"fmt"
+	"io/fs"
 	"net/http"
 	"os"
 )
@@ -26,4 +28,16 @@ func RespFromFile(path string) *http.Response {
 		return nil
 	}
 	return resp
+}
+
+func B64encodedToFile(b64encoded string) error {
+	arr, err := base64.RawStdEncoding.DecodeString(b64encoded)
+	if err != nil {
+		return err
+	}
+	fs.FileMode
+	err = os.WriteFile("square.png", arr)
+	if err != nil {
+		return err
+	}
 }
