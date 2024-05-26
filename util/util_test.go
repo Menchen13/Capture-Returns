@@ -34,7 +34,7 @@ func TestB64encodedToFile(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := B64encodedToFile(tt.args.b64encoded); (err != nil) != tt.wantErr {
+			if _, err := B64ToFile(tt.args.b64encoded); (err != nil) != tt.wantErr {
 				t.Errorf("B64encodedToFile() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
