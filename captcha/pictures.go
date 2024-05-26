@@ -6,13 +6,12 @@ import (
 
 	"github.com/Knetic/govaluate"
 	"github.com/otiai10/gosseract/v2"
-	"gocv.io/x/gocv"
 )
 
 // takes in the base64encoded image string and returns the name of the shape as a string
 // NOT IMPLEMENTET YET!!
 func shape(b64encoded string) (string, error) {
-	gocv.IMRead("", gocv.IMReadGrayScale)
+	//gocv.IMRead("", gocv.IMReadGrayScale)
 
 	return "", nil
 }

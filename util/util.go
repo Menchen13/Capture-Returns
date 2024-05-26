@@ -35,9 +35,11 @@ func B64encodedToFile(b64encoded string) error {
 	if err != nil {
 		return err
 	}
-	fs.FileMode
-	err = os.WriteFile("square.png", arr)
+	var perm fs.FileMode = 0664
+	err = os.WriteFile("square.png", arr, perm)
 	if err != nil {
 		return err
 	}
+
+	return nil
 }
