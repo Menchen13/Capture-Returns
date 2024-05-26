@@ -7,6 +7,8 @@ require (
 	github.com/stretchr/testify v1.9.0
 )
 
+require gocv.io/x/gocv v0.36.1 // indirect
+
 require (
 	github.com/Knetic/govaluate v3.0.0+incompatible
 	github.com/davecgh/go-spew v1.1.1 // indirect
