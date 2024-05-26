@@ -3,9 +3,6 @@ package captcha
 import (
 	"encoding/base64"
 	"fmt"
-	"image"
-	_ "image/png"
-	"strings"
 
 	"github.com/Knetic/govaluate"
 	"github.com/otiai10/gosseract/v2"
@@ -14,15 +11,6 @@ import (
 // takes in the base64encoded image string and returns the name of the shape as a string
 // NOT IMPLEMENTET YET!!
 func shape(b64encoded string) (string, error) {
-	//decode b64encoded into reader
-	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(b64encoded))
-
-	img, format, err := image.Decode(reader)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("Format: ", format, "Color model: ", img.ColorModel())
-
 	return "", nil
 }
 

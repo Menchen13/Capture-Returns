@@ -4,7 +4,7 @@
 # You can just hit `docker run -it --rm otiai10/gosseract`
 # to try and check it out!
 #####
-FROM gocv/opencv:latest
+FROM golang:latest
 
 RUN apt-get update -qq
 
