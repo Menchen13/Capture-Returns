@@ -15,7 +15,7 @@ func TestRespFromFile(t *testing.T) {
 	fmt.Println(resp.Status)
 }
 
-func TestB64encodedToFile(t *testing.T) {
+func TestB64ToFile(t *testing.T) {
 	t.SkipNow()
 	type args struct {
 		b64encoded string
