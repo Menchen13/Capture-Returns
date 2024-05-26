@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"encoding/base64"
 	"fmt"
-	"io/fs"
 	"net/http"
 	"os"
 )
@@ -30,16 +29,25 @@ func RespFromFile(path string) *http.Response {
 	return resp
 }
 
-func B64encodedToFile(b64encoded string) error {
+// takes in a b64 encoded string, containing a png image and returns a file with the image
+// it is the callers responsibility to remove the file when it is nolonger needed
+func B64ToFile(b64encoded string) (*os.File, error) {
 	arr, err := base64.RawStdEncoding.DecodeString(b64encoded)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	var perm fs.FileMode = 0664
-	err = os.WriteFile("square.png", arr, perm)
+	//default perms rw-r--r-- are: 0664
+	tmp, err := os.CreateTemp("", "")
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	defer tmp.Close()
+	_, err = tmp.Write(arr)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return tmp, nil
 }

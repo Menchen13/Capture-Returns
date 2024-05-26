@@ -1,19 +1,65 @@
 package captcha
 
 import (
+	"Menchen13/Capture-Returns/util"
 	"encoding/base64"
+	"errors"
 	"fmt"
+	"image"
+	"os"
 
 	"github.com/Knetic/govaluate"
 	"github.com/otiai10/gosseract/v2"
+	"gocv.io/x/gocv"
 )
 
 // takes in the base64encoded image string and returns the name of the shape as a string
-// NOT IMPLEMENTET YET!!
+// this whole thing is one fat chat-gpt grab
+// NOT TESTET YET!!
 func shape(b64encoded string) (string, error) {
-	//gocv.IMRead("", gocv.IMReadGrayScale)
+	file, err := util.B64ToFile(b64encoded)
+	if err != nil {
+		return "", err
+	}
+	//delete tmp file at the end of func
+	defer os.Remove(file.Name())
 
-	return "", nil
+	//read in file
+	imgMat := gocv.IMRead(file.Name(), gocv.IMReadGrayScale)
+	if imgMat.Empty() {
+		return "", errors.New("empty image mat")
+	}
+	defer imgMat.Close()
+
+	//remove noise from file (probably not needed in my case but gpt is GOD)
+	blured := gocv.NewMat()
+	gocv.GaussianBlur(imgMat, &blured, image.Pt(5, 5), 0, 0, gocv.BorderDefault)
+	defer blured.Close()
+
+	//find edges
+	edges := gocv.NewMat()
+	gocv.Canny(blured, &edges, 50, 150)
+	defer edges.Close()
+
+	//find contours (whatever the fuck that is)
+	contours := gocv.FindContours(edges, gocv.RetrievalExternal, gocv.ChainApproxSimple)
+	defer contours.Close()
+
+	contour := contours.At(0)
+
+	peri := gocv.ArcLength(contour, true)
+	approx := gocv.ApproxPolyDP(contour, 0.04*peri, true)
+
+	defer approx.Close()
+
+	switch approx.Size() {
+	case 3:
+		return "triangle", nil
+	case 4:
+		return "square", nil
+	default:
+		return "circle", nil
+	}
 }
 
 // takes in base64-legal sting containing the term image and returns the solved term.
