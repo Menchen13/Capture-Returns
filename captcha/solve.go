@@ -21,12 +21,15 @@ func Solver(u string) {
 
 		//get b64 encoded image sting from response
 		var img = getImage(resp)
+		fmt.Println("got image: ", i) //debug
 
 		//check for type of captcha and call responding solve function
 		var answer string
 		if isShape(resp) {
+			fmt.Println("image: ", i, "is shape") //debug
 			answer, err = shape(img)
 		} else {
+			fmt.Println("image:", i, "is term") //debug
 			answer, err = term(img)
 		}
 
@@ -41,6 +44,7 @@ func Solver(u string) {
 		if err != nil {
 			panic(err)
 		}
+		fmt.Println("captcha: ", i, "solved") //debug
 	}
 	return
 }
@@ -60,7 +64,6 @@ func getImage(resp *http.Response) string {
 	}
 	//cuts of everything until the b64 string
 	str = str[strings.Index(str, ",")+1:]
-	fmt.Println("made it here")
 	//cuts of everything after the b64 string
 	str = str[:strings.IndexByte(str, byte('"'))]
 
