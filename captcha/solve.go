@@ -62,6 +62,8 @@ func getImage(resp *http.Response) string {
 	str = str[strings.Index(str, ",")+1:]
 	//cuts of everything after the b64 string
 	str = str[:strings.IndexByte(str, byte('"'))]
+	//remove '=' padding char
+	str = strings.TrimRight(str, "=")
 
 	return str
 }
