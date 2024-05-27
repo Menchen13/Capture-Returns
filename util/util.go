@@ -32,15 +32,8 @@ func RespFromFile(path string) *http.Response {
 // takes in a b64 encoded string, containing a png image and returns a file with the image
 // it is the callers responsibility to remove the file when it is nolonger needed
 func B64ToFile(b64encoded string) (*os.File, error) {
-	arr, err := base64.RawStdEncoding.DecodeString(b64encoded)
+	arr, err := base64.StdEncoding.DecodeString(b64encoded)
 	if err != nil {
-		//remove later
-		if len(b64encoded) >= 79171 {
-			fmt.Println("79171: ", []byte(b64encoded)[79171])
-		} else {
-			fmt.Println("22095: ", string([]byte(b64encoded)[22095]))
-		}
-		//22095
 		return nil, err
 	}
 	//default perms rw-r--r-- are: 0664
