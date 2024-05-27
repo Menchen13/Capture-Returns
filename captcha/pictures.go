@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"image"
 	"os"
+	"strings"
 
 	"github.com/Knetic/govaluate"
 	"github.com/otiai10/gosseract/v2"
@@ -88,7 +89,7 @@ func term(base64encoded string) (string, error) {
 	}
 
 	//cut of "=?" for eval
-	term = term[:len(term)-2]
+	term = strings.TrimRight(term, "=?")
 
 	result, err := eval(term)
 	if err != nil {
