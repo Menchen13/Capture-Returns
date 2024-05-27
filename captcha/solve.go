@@ -1,6 +1,7 @@
 package captcha
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -59,6 +60,7 @@ func getImage(resp *http.Response) string {
 	}
 	//cuts of everything until the b64 string
 	str = str[strings.Index(str, ",")+1:]
+	fmt.Println("made it here")
 	//cuts of everything after the b64 string
 	str = str[:strings.IndexByte(str, byte('"'))]
 
