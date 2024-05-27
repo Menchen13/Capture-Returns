@@ -38,6 +38,7 @@ func Test_getImage(t *testing.T) {
 }
 
 func TestSolver(t *testing.T) {
+	t.Skip("Skippting till external server available")
 	type args struct {
 		u string
 	}
