@@ -82,6 +82,11 @@ func term(base64encoded string) (string, error) {
 
 	term, err := client.Text()
 
+	if err != nil || len(term) == 0 {
+		fmt.Println("something went wrong with client.Text(). Term: ", term)
+		return "", err
+	}
+
 	//cut of "=?" for eval
 	term = term[:len(term)-2]
 
