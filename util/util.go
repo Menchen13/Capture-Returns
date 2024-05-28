@@ -51,3 +51,12 @@ func B64ToFile(b64encoded string) (*os.File, error) {
 
 	return tmp, nil
 }
+
+func PrintR(r *http.Response) {
+	if r.ContentLength >= 0 {
+		arr := make([]byte, r.ContentLength)
+		r.Body.Read(arr)
+		defer r.Body.Close()
+		fmt.Println(string(arr))
+	}
+}

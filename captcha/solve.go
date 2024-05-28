@@ -1,6 +1,7 @@
 package captcha
 
 import (
+	"Menchen13/Capture-Returns/util"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -59,6 +60,7 @@ func getImage(resp *http.Response) string {
 
 	_, str, a := strings.Cut(str, "src")
 	if !a {
+		util.PrintR(resp)
 		panic("Couldnt cut out 'src' ")
 	}
 
