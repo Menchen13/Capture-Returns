@@ -38,7 +38,7 @@ func Test_getImage(t *testing.T) {
 }
 
 func TestSolver(t *testing.T) {
-	t.Skip("Skippting till external server available")
+	//t.Skip("Skippting till external server available")
 	type args struct {
 		u string
 	}
@@ -50,7 +50,7 @@ func TestSolver(t *testing.T) {
 		{
 			name: "Solver Test",
 			//this address is temporary
-			args: args{u: "http://10.10.11.28"},
+			args: args{u: "http://10.10.85.222"},
 		},
 	}
 	for _, tt := range tests {
