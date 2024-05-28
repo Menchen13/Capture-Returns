@@ -63,6 +63,7 @@ func getImage(resp *http.Response) string {
 	_, str, a := strings.Cut(str, "src")
 	if !a {
 		util.PrintR(resp)
+		fmt.Println(str)
 		panic("Couldnt cut out 'src' ")
 	}
 
