@@ -67,14 +67,14 @@ func getImage(resp *http.Response) string {
 	if !a {
 		panic("unable to Cut to ','")
 	}
-	fmt.Println("str after ',' split: ", str) //debug
+	//fmt.Println("str after ',' split: ", str) //debug
 
 	//cuts of everything after the b64 string
 	str, _, a = strings.Cut(str, "\"")
 	if !a {
 		panic("unable to cut to \"")
 	}
-	fmt.Println("str after cutting to \": ", str) //debug
+	//fmt.Println("str after cutting to \": ", str) //debug
 
 	return str
 }
