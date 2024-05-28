@@ -2,6 +2,7 @@ package captcha
 
 import (
 	"Menchen13/Capture-Returns/util"
+	"fmt"
 	"net/http"
 	"testing"
 )
@@ -55,6 +56,10 @@ func TestSolver(t *testing.T) {
 	}
 	for _, tt := range tests {
 		if !IsCaptcha(tt.args.u) {
+			r, _ := http.Get(tt.args.u)
+			arr := make([]byte, r.ContentLength)
+			r.Body.Read(arr)
+			fmt.Println(string(arr))
 			panic("No captcha at url!")
 		}
 		t.Run(tt.name, func(t *testing.T) {
