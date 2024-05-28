@@ -12,14 +12,13 @@ func IsCaptcha(u string) bool {
 		panic(err)
 	}
 
-	//1550 characters in body before lable and image
-	arr := make([]byte, 1550)
+	//whole body read in
+	arr := make([]byte, resp.ContentLength)
 	resp.Body.Read(arr)
 	defer resp.Body.Close()
 
-	//check for captcha in arr
-	//only check last little bit
-	if strings.Contains(string(arr[1325:]), "captcha") {
+	//check everything
+	if strings.Contains(string(arr), "captcha") {
 		return true
 	}
 
