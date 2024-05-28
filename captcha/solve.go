@@ -40,7 +40,7 @@ func Solver(u string) {
 			panic(err)
 		}
 		//create url Value and add answer to it
-		var v url.Values
+		v := url.Values{}
 		v.Add("captcha", answer)
 		//send answer using PostForm func and get the response as input for next iteration
 		resp, err = http.PostForm(u, v)
