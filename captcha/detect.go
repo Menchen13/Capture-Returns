@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// returns true if the response contains a captcha
+// returns true if the response from url "u" contains a captcha
 func IsCaptcha(u string) bool {
 	resp, err := http.Get(u)
 	if err != nil {

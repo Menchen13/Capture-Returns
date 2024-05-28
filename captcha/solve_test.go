@@ -38,7 +38,7 @@ func Test_getImage(t *testing.T) {
 }
 
 func TestSolver(t *testing.T) {
-	t.Skip("Skippting till external server available")
+	//t.Skip("Skippting till external server available")
 	type args struct {
 		u string
 	}
@@ -50,10 +50,13 @@ func TestSolver(t *testing.T) {
 		{
 			name: "Solver Test",
 			//this address is temporary
-			args: args{u: "http://10.10.11.28"},
+			args: args{u: "http://10.10.85.222"},
 		},
 	}
 	for _, tt := range tests {
+		if !IsCaptcha(tt.args.u) {
+			panic("No captcha at url!")
+		}
 		t.Run(tt.name, func(t *testing.T) {
 			Solver(tt.args.u)
 		})
