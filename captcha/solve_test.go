@@ -59,6 +59,7 @@ func TestSolver(t *testing.T) {
 			r, _ := http.Get(tt.args.u)
 			arr := make([]byte, r.ContentLength)
 			r.Body.Read(arr)
+			defer r.Body.Close()
 			fmt.Println(string(arr))
 			panic("No captcha at url!")
 		}

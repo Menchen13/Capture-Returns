@@ -55,17 +55,26 @@ func getImage(resp *http.Response) string {
 
 	var arr = make([]byte, resp.ContentLength)
 	resp.Body.Read(arr)
-	//about 1400 characters till body starts
-	var str = string(arr[1400:])
+	var str = string(arr)
 
 	_, str, a := strings.Cut(str, "src")
 	if !a {
-		panic("Couldnt cut cout to response 1")
+		panic("Couldnt cut out 'src' ")
 	}
+
 	//cuts of everything until the b64 string
-	str = str[strings.Index(str, ",")+1:]
+	_, str, a = strings.Cut(str, ",")
+	if !a {
+		panic("unable to Cut to ','")
+	}
+	fmt.Println("str after ',' split: ", str) //debug
+
 	//cuts of everything after the b64 string
-	str = str[:strings.IndexByte(str, byte('"'))]
+	str, _, a = strings.Cut(str, "\"")
+	if !a {
+		panic("unable to cut to \"")
+	}
+	fmt.Println("str after cutting to \": ", str) //debug
 
 	return str
 }
