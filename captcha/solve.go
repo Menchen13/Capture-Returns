@@ -20,6 +20,8 @@ func Solver(u string) {
 	//do everything 3 times as captchas come in batches of 3
 	for i := 0; i < 3; i++ {
 
+		fmt.Println("SOLVER LOOP: ", i) //debug
+
 		//get b64 encoded image sting from response
 		var img = getImage(resp)
 		fmt.Println("got image: ", i) //debug
