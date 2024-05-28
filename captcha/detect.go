@@ -5,23 +5,10 @@ import (
 	"strings"
 )
 
+// GOTTA REDO
 // returns true if the response from url "u" contains a captcha
 func IsCaptcha(u string) bool {
-	resp, err := http.Get(u)
-	if err != nil {
-		panic(err)
-	}
-
-	//whole body read in
-	arr := make([]byte, resp.ContentLength)
-	resp.Body.Read(arr)
-	defer resp.Body.Close()
-
-	//check everything
-	if strings.Contains(string(arr), "captcha") {
-		return true
-	}
-
+	//redoo
 	return false
 }
 

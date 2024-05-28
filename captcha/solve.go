@@ -1,11 +1,9 @@
 package captcha
 
 import (
-	"Menchen13/Capture-Returns/util"
 	"fmt"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 // Solves all captchas until another attempt is possible
@@ -54,32 +52,6 @@ func Solver(u string) {
 
 // takes in a http Response and returns the b64 encoded image string
 func getImage(resp *http.Response) string {
-	//fuck it. Whole body it is.
-
-	var arr = make([]byte, resp.ContentLength)
-	resp.Body.Read(arr)
-	var str = string(arr)
-
-	_, str, a := strings.Cut(str, "src")
-	if !a {
-		util.PrintR(resp)
-		fmt.Println(str)
-		panic("Couldnt cut out 'src' ")
-	}
-
-	//cuts of everything until the b64 string
-	_, str, a = strings.Cut(str, ",")
-	if !a {
-		panic("unable to Cut to ','")
-	}
-	//fmt.Println("str after ',' split: ", str) //debug
-
-	//cuts of everything after the b64 string
-	str, _, a = strings.Cut(str, "\"")
-	if !a {
-		panic("unable to cut to \"")
-	}
-	//fmt.Println("str after cutting to \": ", str) //debug
-
-	return str
+	//redoo
+	return ""
 }
