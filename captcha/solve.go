@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
+
+	"golang.org/x/net/html"
 )
 
 // Solves all captchas until another attempt is possible
@@ -53,6 +56,37 @@ func Solver(u string) {
 // takes in a http Response and returns the b64 encoded image string
 // needs to be redone and retestet
 func getImage(resp *http.Response) string {
-	//redoo
-	return ""
+	arr := make([]byte, resp.ContentLength)
+	resp.Body.Read(arr)
+	defer resp.Body.Close()
+
+	doc, err := html.Parse(strings.NewReader(string(arr)))
+	if err != nil {
+		panic(err)
+	}
+
+	var imageSrc string
+	var f func(*html.Node)
+	f = func(n *html.Node) {
+		if n.Type == html.ElementNode && n.Data == "img" {
+			for _, a := range n.Attr {
+				if a.Key == "src" {
+					imageSrc = a.Val
+					return
+				}
+			}
+		}
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			f(c)
+		}
+	}
+	f(doc)
+
+	if imageSrc == "" {
+		panic("image src not found")
+	}
+	_, imageSrc, _ = strings.Cut(imageSrc, ",")
+
+	return imageSrc
+
 }
