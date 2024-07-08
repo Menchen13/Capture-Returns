@@ -16,8 +16,6 @@ import (
 
 // takes in the base64encoded image string and returns the name of the shape as a string
 // this whole thing is one fat chat-gpt grab
-// NOT TESTET YET!!
-// depends on B64ToFile which is not tested...
 func shape(b64encoded string) (string, error) {
 	file, err := util.B64ToFile(b64encoded)
 	if err != nil {
@@ -64,7 +62,7 @@ func shape(b64encoded string) (string, error) {
 	}
 }
 
-// takes in base64-legal sting containing the term image and returns the solved term.
+// takes in base64-encoded sting containing the term image and returns the solved term.
 func term(base64encoded string) (string, error) {
 	client := gosseract.NewClient()
 	defer client.Close()
