@@ -51,6 +51,7 @@ func Solver(u string) {
 }
 
 // takes in a http Response and returns the b64 encoded image string
+// needs to be redone and retestet
 func getImage(resp *http.Response) string {
 	//redoo
 	return ""

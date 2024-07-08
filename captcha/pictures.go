@@ -17,6 +17,7 @@ import (
 // takes in the base64encoded image string and returns the name of the shape as a string
 // this whole thing is one fat chat-gpt grab
 // NOT TESTET YET!!
+// depends on B64ToFile which is not tested...
 func shape(b64encoded string) (string, error) {
 	file, err := util.B64ToFile(b64encoded)
 	if err != nil {

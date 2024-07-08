@@ -5,13 +5,6 @@ import (
 	"strings"
 )
 
-// GOTTA REDO
-// returns true if the response from url "u" contains a captcha
-func IsCaptcha(u string) bool {
-	//redoo
-	return false
-}
-
 // returns true if the captcha is shape based
 func isShape(resp *http.Response) bool {
 	//about 1650 bytes till image
