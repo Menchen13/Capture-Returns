@@ -1,6 +1,7 @@
 package captcha
 
 import (
+	"Menchen13/Capture-Returns/util"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -17,6 +18,7 @@ func Solver(u string) {
 		panic(err)
 
 	}
+	defer util.PrintR(resp)
 
 	//do everything 3 times as captchas come in batches of 3
 	for i := 0; i < 3; i++ {
