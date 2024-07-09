@@ -39,6 +39,7 @@ func Solver(u string) {
 		}
 
 		if err != nil {
+			fmt.Println("error in Shape() or Term()") //debug
 			panic(err)
 		}
 		//create url Value and add answer to it
@@ -47,6 +48,7 @@ func Solver(u string) {
 		//send answer using PostForm func and get the response as input for next iteration
 		resp, err = http.PostForm(u, v)
 		if err != nil {
+			fmt.Println("Error in PostForm") //debug
 			panic(err)
 		}
 		fmt.Println("captcha: ", i, "solved") //debug
