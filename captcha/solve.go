@@ -84,6 +84,7 @@ func getImage(resp *http.Response) string {
 	f(doc)
 
 	if imageSrc == "" {
+		fmt.Println(string(arr)) //debug
 		panic("image src not found")
 	}
 	_, imageSrc, _ = strings.Cut(imageSrc, ",")
