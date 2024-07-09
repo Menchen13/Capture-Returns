@@ -1,8 +1,8 @@
 package captcha
 
 import (
-	"Menchen13/Capture-Returns/util"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -18,7 +18,6 @@ func Solver(u string) {
 		panic(err)
 
 	}
-	defer util.PrintR(resp)
 
 	//do everything 3 times as captchas come in batches of 3
 	for i := 0; i < 3; i++ {
@@ -57,8 +56,10 @@ func Solver(u string) {
 
 // takes in a http Response and returns the b64 encoded image string
 func getImage(resp *http.Response) string {
-	arr := make([]byte, resp.ContentLength)
-	resp.Body.Read(arr)
+	arr, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic("error when reading in resp.Body")
+	}
 	defer resp.Body.Close()
 
 	doc, err := html.Parse(strings.NewReader(string(arr)))
