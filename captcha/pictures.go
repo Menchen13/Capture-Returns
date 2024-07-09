@@ -77,13 +77,13 @@ func term(base64encoded string) (string, error) {
 	client.Trim = true
 	err = client.SetImageFromBytes(str)
 	if err != nil {
-		return "", fmt.Errorf("SetImageFromBytes(): ", err)
+		return "", fmt.Errorf("SetImageFromBytes(): %w", err)
 	}
 
 	term, err := client.Text()
 
 	if err != nil || len(term) == 0 {
-		return "", fmt.Errorf("Text(): ", err)
+		return "", fmt.Errorf("Text(): %w", err)
 	}
 
 	//cut of "=?" for eval
@@ -91,7 +91,7 @@ func term(base64encoded string) (string, error) {
 
 	result, err := eval(term)
 	if err != nil {
-		return "", fmt.Errorf("eval(): ", err)
+		return "", fmt.Errorf("eval(): %w", err)
 	}
 
 	// convert the result to string using fmt.Sprint
