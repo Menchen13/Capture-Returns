@@ -1,21 +1,46 @@
 package captcha
 
 import (
+	"bytes"
+	"fmt"
+	"io"
 	"net/http"
 	"strings"
+
+	"golang.org/x/net/html"
 )
 
 // returns true if the captcha is shape based
 func isShape(resp *http.Response) bool {
-	//about 1650 bytes till image
-	arr := make([]byte, 1700)
-
-	resp.Body.Read(arr)
+	//read in response Body
+	BytesBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(fmt.Errorf("Error Reading in Body: %w", err))
+	}
 	defer resp.Body.Close()
 
-	//only check in last little bit of body
-	if strings.Contains(string(arr[1500:]), "shape") {
-		return true
+	doc, err := html.Parse(bytes.NewReader(BytesBody))
+
+	var labelText string
+	var f func(*html.Node)
+	f = func(n *html.Node) {
+		if n.Type == html.ElementNode && n.Data == "label" {
+			for c := n.FirstChild; c != nil; c = c.NextSibling {
+				if c.Type == html.TextNode && strings.Contains(c.Data, "Describe the shape below") {
+					labelText = c.Data
+					return
+				}
+			}
+		}
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			f(c)
+		}
 	}
-	return false
+	f(doc)
+
+	if labelText != "" {
+		return true
+	} else {
+		return false
+	}
 }
