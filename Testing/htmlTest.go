@@ -1,4 +1,4 @@
-package captcha
+package testing
 
 import (
 	"bytes"
@@ -9,27 +9,24 @@ import (
 	"golang.org/x/net/html"
 )
 
-// returns true if the captcha is shape based
-func isShape(resp *http.Response) bool {
+func HtmlParse(resp *http.Response) bool {
 	//read in response Body
 	BytesBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		panic(fmt.Errorf("Error Reading in Body: %w", err))
+		panic(fmt.Errorf("error reading in body: %w", err))
 	}
 	defer resp.Body.Close()
 
 	doc, err := html.Parse(bytes.NewReader(BytesBody))
 
+	if err != nil {
+		panic(fmt.Errorf("error parsing: '%w'", err))
+	}
+
 	var f func(*html.Node)
 	f = func(n *html.Node) {
-		if n.Type == html.ElementNode && n.Data == "a" {
-			for _, a := range n.Attr {
-				if a.Key == "href" {
-					fmt.Println(a.Val)
-					break
-				}
-			}
-		}
+		fmt.Println("Type: ", n.Type, "Data: ", n.Data, "Namespace: ", n.Namespace, "Attributes: ", n.Attr)
+
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
 		}
