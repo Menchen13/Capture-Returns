@@ -24,7 +24,12 @@ func isShape(resp *http.Response) bool {
 		panic(fmt.Errorf("Error parsing HTML: %v\n", err))
 
 	}
+	if err != nil {
+		panic(fmt.Errorf("Error parsing HTML: %v\n", err))
 
+	}
+
+	// Traverse the HTML nodes to find the label
 	// Traverse the HTML nodes to find the label
 	var labelText string
 	var f func(*html.Node)
