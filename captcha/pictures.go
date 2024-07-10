@@ -82,8 +82,11 @@ func term(base64encoded string) (string, error) {
 
 	term, err := client.Text()
 
-	if err != nil || len(term) == 0 {
+	if err != nil {
 		return "", fmt.Errorf("Text(): %w with term: %s", err, term)
+	}
+	if len(term) == 0 {
+		panic(fmt.Errorf("0 len term detectet. With b64Image: %s", base64encoded))
 	}
 
 	//cut of "=?" for eval
