@@ -26,6 +26,7 @@ func isShape(resp *http.Response) bool {
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.Data == "label" {
 			for c := n.FirstChild; c != nil; c = c.NextSibling {
+				fmt.Println(c.Data)
 				if c.Type == html.TextNode && strings.Contains(c.Data, "Describe the shape below") {
 					labelText = c.Data
 					return
