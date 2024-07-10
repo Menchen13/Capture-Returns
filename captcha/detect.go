@@ -44,8 +44,8 @@ func isShape(resp *http.Response) bool {
 	f(doc)
 
 	if labelText != "" {
-		return true
-	} else {
 		return false
+	} else {
+		return true
 	}
 }
