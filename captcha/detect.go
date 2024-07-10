@@ -29,7 +29,7 @@ func isShape(resp *http.Response) bool {
 	// Find the label element that contains the description
 	doc.Find("label").Each(func(i int, s *goquery.Selection) {
 		text := s.Text()
-		fmt.Println("found label", text) //debug
+		fmt.Println("found label", "'", text, "'") //debug
 		if strings.Contains(text, "Describe the shape below") {
 			shape = true
 		}
