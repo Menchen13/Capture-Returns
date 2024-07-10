@@ -83,7 +83,7 @@ func term(base64encoded string) (string, error) {
 	term, err := client.Text()
 
 	if err != nil || len(term) == 0 {
-		return "", fmt.Errorf("Text(): %w", err)
+		return "", fmt.Errorf("Text(): %w with term: %s", err, term)
 	}
 
 	//cut of "=?" for eval
@@ -92,7 +92,7 @@ func term(base64encoded string) (string, error) {
 	result, err := eval(term)
 	if err != nil {
 		fmt.Println(term)
-		return "", fmt.Errorf("eval(): %w", err)
+		return "", fmt.Errorf("eval(): %w with term: %s", err, term)
 	}
 
 	// convert the result to string using fmt.Sprint
