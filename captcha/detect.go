@@ -2,20 +2,11 @@ package captcha
 
 import (
 	"fmt"
-	"io"
-	"net/http"
 	"strings"
 )
 
 // returns true if the captcha is shape based
-func isShape(resp *http.Response) bool {
-	//read in response Body
-	BytesBody, err := io.ReadAll(resp.Body)
-	if err != nil {
-		panic(fmt.Errorf("error reading in body: %w", err))
-	}
-	defer resp.Body.Close()
-
+func isShape(BytesBody []byte) bool {
 	// doc, err := html.Parse(bytes.NewReader(BytesBody))
 
 	// if err != nil {

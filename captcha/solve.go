@@ -23,14 +23,19 @@ func Solver(u string) {
 	for i := 0; i < 3; i++ {
 
 		fmt.Println("SOLVER LOOP: ", i) //debug
+		Body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			panic("error when reading in resp.Body")
+		}
+		resp.Body.Close()
 
 		//get b64 encoded image sting from response
-		var img = getImage(resp)
+		var img = getImage(Body)
 		fmt.Println("got image: ", i) //debug
 
 		//check for type of captcha and call responding solve function
 		var answer string
-		if isShape(resp) {
+		if isShape(Body) {
 			fmt.Println("image: ", i, "is shape") //debug
 			answer, err = shape(img)
 		} else {
@@ -57,12 +62,7 @@ func Solver(u string) {
 }
 
 // takes in a http Response and returns the b64 encoded image string
-func getImage(resp *http.Response) string {
-	arr, err := io.ReadAll(resp.Body)
-	if err != nil {
-		panic("error when reading in resp.Body")
-	}
-	// defer resp.Body.Close()
+func getImage(arr []byte) string {
 
 	doc, err := html.Parse(strings.NewReader(string(arr)))
 	if err != nil {
