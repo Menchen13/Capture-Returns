@@ -20,7 +20,7 @@ func TestSolver(t *testing.T) {
 		{
 			name: "Solver Test",
 			//this address is temporary
-			args: args{u: "http://10.10.83.191/login"},
+			args: args{u: "http://10.10.3.117/login"},
 		},
 	}
 	for _, tt := range tests {
