@@ -28,5 +28,5 @@ func Orca(Url string, user string, pass string) bool {
 
 	Body, _ := io.ReadAll(resp.Body)
 
-	return !strings.Contains(string(Body), "Invalid username or password")
+	return strings.Contains(string(Body), "Invalid username or password")
 }
