@@ -2,8 +2,10 @@ package brute
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 func try(client *http.Client, u string, user string, pass string) *http.Response {
@@ -24,11 +26,7 @@ func try(client *http.Client, u string, user string, pass string) *http.Response
 func Orca(Url string, user string, pass string) bool {
 	resp := try(http.DefaultClient, Url, user, pass)
 
-	//need to find an identifier for success
-	//Identifier will be redirect, hopefully this works
-	if resp.StatusCode >= 300 && resp.StatusCode <= 400 {
-		return true
-	}
+	Body, _ := io.ReadAll(resp.Body)
 
-	return false
+	return !strings.Contains(string(Body), "Invalid username or password")
 }
