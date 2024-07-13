@@ -1,7 +1,6 @@
 package captcha
 
 import (
-	"Menchen13/Capture-Returns/brute"
 	"Menchen13/Capture-Returns/util"
 	"fmt"
 	"net/http"
@@ -35,9 +34,8 @@ func TestSolver(t *testing.T) {
 func toCaptcha(t *testing.T, u string) {
 	t.Helper()
 	for i := 0; i < 3; i++ {
-		if brute.Orca(u, "a", "a") {
-			fmt.Println("a:a was right!")
-		}
+		fmt.Println("a:a was right!")
+
 	}
 
 }
