@@ -22,6 +22,7 @@ func isShape(resp *http.Response) bool {
 
 	var f func(*html.Node)
 	f = func(n *html.Node) {
+		//
 		if n.Type == html.ElementNode && n.Data == "a" {
 			for _, a := range n.Attr {
 				if a.Key == "href" {
@@ -31,6 +32,7 @@ func isShape(resp *http.Response) bool {
 			}
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
+
 			f(c)
 		}
 	}

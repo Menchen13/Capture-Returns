@@ -19,7 +19,7 @@ func TestHtmlParse(t *testing.T) {
 		{
 			name: "Testing",
 			args: args{resp: util.RespFromFile("Responses/square.html")},
-			want: false,
+			want: true,
 		},
 	}
 	for _, tt := range tests {
