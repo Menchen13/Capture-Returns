@@ -1,7 +1,6 @@
 package captcha
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -32,7 +31,6 @@ func isShape(BytesBody []byte) bool {
 	if strings.Contains(string(BytesBody), "circle, square, or triangle") {
 		return true
 	}
-	fmt.Println("Response: ", string(BytesBody)) //debug
 
 	return false
 }

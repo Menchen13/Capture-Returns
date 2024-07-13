@@ -2,6 +2,8 @@ package captcha
 
 import (
 	"Menchen13/Capture-Returns/brute"
+	"Menchen13/Capture-Returns/util"
+	"net/http"
 	"testing"
 )
 
@@ -25,6 +27,8 @@ func TestSolver(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			toCaptcha(t, tt.args.u)
 			Solver(tt.args.u)
+			resp, _ := http.Get(tt.args.u)
+			util.PrintR(resp)
 		})
 	}
 }
