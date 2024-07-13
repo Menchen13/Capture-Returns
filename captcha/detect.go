@@ -38,7 +38,7 @@ func isShape(resp *http.Response) bool {
 
 	// return shape
 
-	if strings.Contains(string(BytesBody), "Describe the shape below (circle, square, or triangle)") {
+	if strings.Contains(string(BytesBody), "circle, square, or triangle") {
 		return true
 	}
 
