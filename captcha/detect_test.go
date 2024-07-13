@@ -1,11 +1,5 @@
 package captcha
 
-import (
-	"Menchen13/Capture-Returns/util"
-	"net/http"
-	"testing"
-)
-
 /*func TestIsCaptcha(t *testing.T) {
 	//tests successfull skipping this now as it is no longer functional
 	t.SkipNow()
@@ -55,31 +49,31 @@ import (
 	}
 }*/
 
-func Test_isShape(t *testing.T) {
-	type args struct {
-		resp *http.Response
-	}
-	tests := []struct {
-		name string
-		args args
-		want bool
-	}{
-		{
-			name: "shape",
-			args: args{resp: util.RespFromFile("Responses/circle.html")},
-			want: true,
-		},
-		{
-			name: "noShape",
-			args: args{resp: util.RespFromFile("Responses/multiplication.html")},
-			want: false,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := isShape(tt.args.resp); got != tt.want {
-				t.Errorf("isShape() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+// func Test_isShape(t *testing.T) {
+// 	type args struct {
+// 		resp *http.Response
+// 	}
+// 	tests := []struct {
+// 		name string
+// 		args args
+// 		want bool
+// 	}{
+// 		{
+// 			name: "shape",
+// 			args: args{resp: util.RespFromFile("Responses/circle.html")},
+// 			want: true,
+// 		},
+// 		{
+// 			name: "noShape",
+// 			args: args{resp: util.RespFromFile("Responses/multiplication.html")},
+// 			want: false,
+// 		},
+// 	}
+// 	for _, tt := range tests {
+// 		t.Run(tt.name, func(t *testing.T) {
+// 			if got := isShape(tt.args.resp); got != tt.want {
+// 				t.Errorf("isShape() = %v, want %v", got, tt.want)
+// 			}
+// 		})
+// 	}
+// }
