@@ -1,4 +1,4 @@
-// package captcha
+package captcha
 
 // import (
 // 	"Menchen13/Capture-Returns/util"
