@@ -62,7 +62,7 @@ func getImage(resp *http.Response) string {
 	if err != nil {
 		panic("error when reading in resp.Body")
 	}
-	defer resp.Body.Close()
+	// defer resp.Body.Close()
 
 	doc, err := html.Parse(strings.NewReader(string(arr)))
 	if err != nil {
