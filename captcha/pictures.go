@@ -94,7 +94,8 @@ func term(base64encoded string) (string, error) {
 
 	result, err := eval(term)
 	if err != nil {
-		fmt.Println(term) //debug
+		fmt.Println(base64encoded, ": ", term) //debug
+
 		return "", fmt.Errorf("eval(): %w with term: %s", err, term)
 	}
 
