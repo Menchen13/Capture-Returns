@@ -60,6 +60,8 @@ COPY util /workdir/util
 
 COPY ./main.go /workdir/
 
+COPY ./CTF-files/* /workdir/
+
 RUN go install .
 
 CMD ["/bin/bash"]
