@@ -90,7 +90,7 @@ func term(base64encoded string) (string, error) {
 	}
 
 	//cut of "=?" for eval
-	term = strings.TrimRight(term, "=?")
+	term, _, _ = strings.Cut(term, "=")
 
 	result, err := eval(term)
 	if err != nil {
