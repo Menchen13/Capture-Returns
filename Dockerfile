@@ -53,10 +53,13 @@ WORKDIR /workdir
 # Try `docker run -it --rm otiai10/gosseract` to test this environment.
 #CMD go test -v github.com/otiai10/gosseract/v2
 COPY ./go.* /workdir/
-COPY ./captcha /workdir/
-COPY ./brute /workdir/
-COPY ./util/ /workdir/
+
+COPY ./captcha /usr/local/go/src/Menchen13/Capture-Returns/captcha
+COPY ./brute /usr/local/go/src/Menchen13/Capture-Returns/brute/
+COPY ./util/ /usr/local/go/src/Menchen13/Capture-Returns/util/
+
 COPY ./main.go /workdir/
+
 RUN go install .
 
 CMD ["/bin/bash"]

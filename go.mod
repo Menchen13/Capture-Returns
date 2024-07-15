@@ -2,10 +2,6 @@ module Menchen13/Capture-Returns
 
 go 1.21.5
 
-require /workdir/captcha v0.0.0
-require /workdir/brute v0.0.0
-require /workdir/util v0.0.0
-
 require github.com/otiai10/gosseract/v2 v2.4.1
 
 require gocv.io/x/gocv v0.36.1
