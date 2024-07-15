@@ -54,13 +54,12 @@ WORKDIR /workdir
 #CMD go test -v github.com/otiai10/gosseract/v2
 COPY ./go.* /workdir/
 
-COPY ./captcha /usr/local/go/src/Menchen13/Capture-Returns/captcha
-COPY ./brute /usr/local/go/src/Menchen13/Capture-Returns/brute/
-COPY ./util/ /usr/local/go/src/Menchen13/Capture-Returns/util/
+COPY ./captcha /workdir/
+COPY ./brute /workdir/
 
 COPY ./main.go /workdir/
 
-RUN go install .
+RUN go install -o Orca .
 
 CMD ["/bin/bash"]
  
