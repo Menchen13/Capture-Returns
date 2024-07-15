@@ -55,6 +55,7 @@ WORKDIR /workdir
 COPY ./go.* /workdir/
 COPY ./captcha /workdir/
 COPY ./brute /workdir/
+COPY ./util/ /workdir/
 COPY ./main.go /workdir/
 RUN go install .
 

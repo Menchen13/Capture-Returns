@@ -2,8 +2,8 @@
 package main
 
 import (
-	"/workdir/brute"
-	"/workdir/captcha"
+	"Menchen13/Capture-Returns/brute"
+	"Menchen13/Capture-Returns/captcha"
 	"errors"
 	"flag"
 	"fmt"
