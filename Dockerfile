@@ -52,10 +52,10 @@ WORKDIR /workdir
 
 # Try `docker run -it --rm otiai10/gosseract` to test this environment.
 #CMD go test -v github.com/otiai10/gosseract/v2
-COPY ./go.* WORKDIR
+COPY ./go.* /workdir/
 COPY ./captcha /workdir/
 COPY ./brute /workdir/
-COPY ./main.go WOKRDIR
+COPY ./main.go /workdir/
 RUN go install -o Orca .
 
 CMD ["/bin/bash"]
