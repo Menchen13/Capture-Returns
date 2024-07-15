@@ -54,9 +54,9 @@ WORKDIR /workdir
 #CMD go test -v github.com/otiai10/gosseract/v2
 COPY ./go.* /workdir/
 
-COPY ./captcha /workdir/
-COPY ./brute /workdir/
-COPY ./util/ /workdir/
+COPY captcha /workdir/
+COPY brute /workdir/
+COPY util/ /workdir/
 
 COPY ./main.go /workdir/
 
