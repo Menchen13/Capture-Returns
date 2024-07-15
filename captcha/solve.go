@@ -22,7 +22,6 @@ func Solver(u string) {
 	//do everything 3 times as captchas come in batches of 3
 	for i := 0; i < 3; i++ {
 
-		fmt.Println("SOLVER LOOP: ", i) //debug
 		Body, err := io.ReadAll(resp.Body)
 		if err != nil {
 			panic("error when reading in resp.Body")
@@ -31,20 +30,16 @@ func Solver(u string) {
 
 		//get b64 encoded image sting from response
 		var img = getImage(Body)
-		fmt.Println("got image: ", i) //debug
 
 		//check for type of captcha and call responding solve function
 		var answer string
 		if isShape(Body) {
-			fmt.Println("image: ", i, "is shape") //debug
 			answer, err = shape(img)
 		} else {
-			fmt.Println("image:", i, "is term") //debug
 			answer, err = term(img)
 		}
 
 		if err != nil {
-			fmt.Println("error in Shape() or Term()") //debug
 			panic(err)
 		}
 		//create url Value and add answer to it
@@ -53,10 +48,8 @@ func Solver(u string) {
 		//send answer using PostForm func and get the response as input for next iteration
 		resp, err = http.PostForm(u, v)
 		if err != nil {
-			fmt.Println("Error in PostForm") //debug
 			panic(err)
 		}
-		fmt.Println("captcha: ", i, "solved") //debug
 	}
 	return
 }
