@@ -56,7 +56,7 @@ COPY ./go.* WORKDIR
 COPY ./captcha /workdir/
 COPY ./brute /workdir/
 COPY ./main.go WOKRDIR
-RUN go install .
+RUN go install -o Orca .
 
 CMD ["/bin/bash"]
  
