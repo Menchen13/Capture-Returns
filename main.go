@@ -79,6 +79,7 @@ func main() {
 		fmt.Println("Finished username: ", v)
 	}
 	fmt.Println("Failed to find valid user:pass combination!")
+	//It worked !!!!
 
 }
 
