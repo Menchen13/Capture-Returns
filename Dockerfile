@@ -31,22 +31,16 @@ RUN apt-get install -y -qq \
 # If you want to download these traineddata via `wget`, don't forget to locate
 # downloaded traineddata under ${TESSDATA_PREFIX}/tessdata.
 
-# Setup your cool project with go.mod.
-#WORKDIR /gocv
-
-#RUN git clone https://github.com/hybridgroup/gocv.git && cd gocv && make install
-
-#all my project files will be added using a volume during development time
-#I also shouldnt have to get any dependencies, as they should be installed acording to the go.mod and go.sum file
-#which are passed with the volume
-
-RUN useradd -ms /bin/bash dev
-
-# Allow the "dev" user to run sudo without a password
-RUN echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
-USER dev
+
+# RUN useradd -ms /bin/bash dev
+
+# # Allow the "dev" user to run sudo without a password
+# RUN echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+
+# USER dev
 
 
 WORKDIR /workdir 
@@ -58,7 +52,11 @@ WORKDIR /workdir
 
 # Try `docker run -it --rm otiai10/gosseract` to test this environment.
 #CMD go test -v github.com/otiai10/gosseract/v2
-COPY ./* workdir
+COPY ./go.* WORKDIR
+COPY ./captcha /workdir/
+COPY ./brute /workdir/
+COPY ./main.go WOKRDIR
+RUN go install .
 
-CMD bash
+CMD ["/bin/bash"]
  
