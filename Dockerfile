@@ -58,5 +58,7 @@ WORKDIR /workdir
 
 # Try `docker run -it --rm otiai10/gosseract` to test this environment.
 #CMD go test -v github.com/otiai10/gosseract/v2
-CMD go test -v ./...
+COPY ./* workdir
+
+CMD bash
  
