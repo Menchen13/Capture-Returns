@@ -51,6 +51,15 @@ func Solver(u string) {
 			panic(err)
 		}
 	}
+
+	Body, _ := io.ReadAll(resp.Body)
+	if strings.Contains(string(Body), "captchas") {
+		fmt.Println("Solver seems to have left a captcha open. Restarting solver!")
+		v := url.Values{}
+		v.Add("captcha", "tranglange") //obviously wrong answer to reset captcha counter, so the loop of 3 is correct
+		http.PostForm(u, v)
+		Solver(u) //calling solver function again
+	}
 	return
 }
 
